@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
 from markdown import markdown
 from . import util
 
@@ -22,3 +22,5 @@ def search(request):
     p=request
     name=request.POST['querry']
     return title(p, name)
+def add_page(request):
+    return render(request, "encyclopedia/add-page.html")

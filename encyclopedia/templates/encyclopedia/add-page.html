@@ -1,8 +1,17 @@
 {% extends "encyclopedia/layout.html" %}
 
-{% block css %}
-./add_page-css
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'encyclopedia/add-page.css' %}">
 {% endblock %}
 {% block body %}
-<h1>add_page</h1>
+<form class="rayan" action="">
+    <h1>Add title:</h1>
+    <input type="text" id="title" name="title" placeholder="title" dir="">
+    <h1 id="rayan">Add-Page:</h1>
+    <textarea name="text" id="text" cols="30" rows="10" placeholder="content"></textarea><br>
+    <input type="submit">
+</form>
+
 {% endblock%}
