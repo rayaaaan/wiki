@@ -1,5 +1,7 @@
 from django.shortcuts import render, HttpResponse
+from django.contrib import messages
 from markdown import markdown
+
 from random import choice
 from . import util
 
@@ -7,13 +9,17 @@ from . import util
 
 
 def index(request):
-    if request.method=="POST": 
+    if request.method=="POST":
         title=request.POST["title_new_page"]
         if title in util.list_entries():
-            return HttpResponse(f"there is {title}")
-        if "title" not in request.session:
+            return render(request, "encyclopedia/go-back.html")
+        if "my_entries" not in request.session:
             request.session["my_entries"]=[]
-            request.session["my_entries"].append(title)
+        if not request.session["my_entries"]:
+            request.session["my_entries"]=[]
+        request.session["my_entries"].append(title)
+        request.session.save()
+        messages.success(request, f"{title} added successfully.")
         content=request.POST["text"]
         util.save_entry(title, content)
     return render(request, "encyclopedia/index.html", {
@@ -49,10 +55,6 @@ def random(request):
 
 
 def my_pages(request):
-    if not request.session["my_entries"]:
-        entries="pythone"
-    else:
-        entries=request.session["my_entries"]
     return render(request, "encyclopedia/my_pages.html",{
-        "my_entries":entries
+        "my_entries":request.session["my_entries"]
     })

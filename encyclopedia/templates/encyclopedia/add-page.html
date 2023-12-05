@@ -9,9 +9,9 @@
 <form class="rayan" action="{% url 'q:index1' %}" method="POST">
     <h1>Add title:</h1>
     {% csrf_token %}
-    <input type="text" id="title" name="title_new_page" placeholder="title" >
+    <input type="text" id="title" name="title_new_page" placeholder="title" required >
     <h1 id="rayan">Add-Page:</h1>
-    <textarea name="text" id="text" cols="30" rows="10" placeholder="These is a Markdown's syntax Read through GitHub’s <<Markdown guide in the sidebar>> to get an understanding for how Markdown’s syntax works." ></textarea><br>
+    <textarea name="text" id="text"  cols="30" rows="10" required placeholder="These is a Markdown's syntax Read through GitHub’s <<Markdown guide in the sidebar>> to get an understanding for how Markdown’s syntax works." ></textarea><br>
     <input type="submit">
 </form>
 

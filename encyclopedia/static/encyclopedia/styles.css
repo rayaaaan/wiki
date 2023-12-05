@@ -2,7 +2,12 @@ body {
     margin: 0;
     background-color: white;
 }
-
+#hi{
+    text-align: center;
+}
+#button{
+    text-align: center;
+}
 code {
     white-space: pre;
 }
