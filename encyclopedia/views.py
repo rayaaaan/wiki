@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from markdown import markdown
+from random import choice
 from . import util
 
 
@@ -33,3 +34,6 @@ def search(request):
 def add_page(request):
     if request.method=="GET":
         return render(request, "encyclopedia/add-page.html")
+def random(request):
+    random=choice(util.list_entries())
+    return title(request, random)
