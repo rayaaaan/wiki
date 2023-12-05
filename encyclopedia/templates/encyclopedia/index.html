@@ -9,7 +9,9 @@
 
     <ul>
         {% for entry in entries %}
-            <li><a href="{% url 'q:title' name=entry %}">{{ entry }}</a></li>      
+            {% if entry %}
+                <li><a href="{% url 'q:title' name=entry %}">{{ entry }}</a></li>
+            {% endif%}
         {% endfor %}
     </ul>
 

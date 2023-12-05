@@ -15,10 +15,10 @@
     <body>
         <div class="row">
             <div class="sidebar col-lg-2 col-md-3">
-                <h2>Wiki</h2>
+                <a href="{% url 'q:index1' %}"><h2 style="color: black;">Wiki</h2></a>
                 <form action="{% url 'q:search' %}" method="POST">
                     {% csrf_token %}
-                    <input class="search" type="text" name="querry" placeholder="Search Encyclopedia">
+                    <input class="search" type="text" name="querry" autocomplete="off" placeholder="Search Encyclopedia">
                 </form>
                 <div>
                     <a href="{% url 'q:index1' %}">Home</a>
@@ -28,6 +28,9 @@
                 </div>
                 <div>
                      Random Page
+                </div>
+                <div>
+                    <a href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax" target="_blank">MARKDOWN'S GUIDE</a>
                 </div>
                 {% block nav %}
                 {% endblock %}

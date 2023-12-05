@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from markdown import markdown
 from . import util
 
@@ -6,6 +6,12 @@ from . import util
 
 
 def index(request):
+    if request.method=="POST": 
+        title=request.POST["title_new_page"]
+        if title in util.list_entries():
+            return HttpResponse(f"there is {title}")
+        content=request.POST["text"]
+        util.save_entry(title, content)
     return render(request, "encyclopedia/index.html", {
         "entries": util.list_entries()
     })
@@ -22,5 +28,8 @@ def search(request):
     p=request
     name=request.POST['querry']
     return title(p, name)
+
+
 def add_page(request):
-    return render(request, "encyclopedia/add-page.html")
+    if request.method=="GET":
+        return render(request, "encyclopedia/add-page.html")
