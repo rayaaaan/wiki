@@ -11,7 +11,11 @@
         {% for entry in entries %}
             {% if entry %}
                 <li><a href="{% url 'q:title' name=entry %}">{{ entry }}</a></li>
+            {% else%}
+            <li>you have no pages</li>
             {% endif%}
+            
+
         {% endfor %}
     </ul>
 
