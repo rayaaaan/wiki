@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from markdown import markdown
 from . import util
 
@@ -11,11 +11,14 @@ def index(request):
     })
 def title(request, name):
     path=f"C:\\Users\\OMEN 16\\Desktop\\django\\wiki\\entries\\{name}.md"
-    with open(path, "r", encoding="utf-8") as filee:
+    with open(path, "r") as filee:
         file=markdown(filee.read())
             
     return render(request, "encyclopedia/title.html", {
         "html_content":file
     })
+    
 def search(request):
-    return
+    p=request
+    name=request.POST['querry']
+    return title(p, name)

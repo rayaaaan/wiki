@@ -7,5 +7,5 @@ app_name='q'
 urlpatterns = [
     path("", views.index, name="index1"),
     path("wiki/<str:name>/",views.title, name="title"),
-    path("wiki/search/", views.search, name="search"),
+    path("search/", views.search, name="search"),
 ]
