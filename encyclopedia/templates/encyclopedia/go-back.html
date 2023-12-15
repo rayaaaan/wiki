@@ -1,0 +1,5 @@
+{% extends "encyclopedia/layout.html" %}
+{% block body %}
+    <h1 id="hi">there is a page with this name</h1>
+    <a href="{% url 'q:add_page' %}"><button id="button">Press here to go back</button></a>
+{% endblock body %}

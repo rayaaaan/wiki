@@ -1,0 +1,14 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block body %}
+    <h1>My Pages</h1>
+
+    <ul>
+        {% for entry in my_entries %}
+            {% if entry %}
+                <li><a href="{% url 'q:title' name=entry %}">{{ entry }}</a></li>
+            {% endif%}
+        {% endfor %}
+    </ul>
+
+{% endblock %}

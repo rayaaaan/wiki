@@ -1,0 +1,13 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block body %}
+    <h1>edit Page</h1>
+
+    <ul>
+        {% for entry in my_entries %}
+            {% if entry %}
+                <li><a href="{% url 'q:edit' page=entry %}">{{ entry }}</a></li>
+            {% endif%}
+        {% endfor %}
+    </ul>
+{% endblock %}
