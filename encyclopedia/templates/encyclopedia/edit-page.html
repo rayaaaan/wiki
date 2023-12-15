@@ -10,6 +10,7 @@
     <h1>Add title:</h1>
     {% csrf_token %}
     <input type="hidden" name="index" value="0">
+    <input type="hidden" name="tl" value={{page}}>
     <input type="text" value={{page}} id="title" name="title_new_page" placeholder="title" required >
     <h1 id="rayan">Add-Page:</h1>
     <textarea name="text" id="text"  cols="30" rows="10" required placeholder="These is a Markdown's syntax Read through GitHub’s <<Markdown guide in the 

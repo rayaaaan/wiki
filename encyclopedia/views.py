@@ -4,21 +4,28 @@ from markdown import markdown
 
 from random import choice
 from . import util
-
+from os import remove, rename
 
 
 
 def index(request):
     if request.method=="POST":
         title=request.POST["title_new_page"]
+        if "my_entries" not in request.session:
+            request.session["my_entries"]=[]
+        if not request.session["my_entries"]:
+            request.session["my_entries"]=[]
         if request.POST["index"]=="1":
             if title in util.list_entries():
                 return render(request, "encyclopedia/go-back.html")
-            if "my_entries" not in request.session:
-                request.session["my_entries"]=[]
-            if not request.session["my_entries"]:
-                request.session["my_entries"]=[]
-        request.session["my_entries"].append(title)
+            else:  
+                request.session["my_entries"].append(title)
+        else:
+            print(request.POST["tl"])
+            rename(f"C:\\Users\\OMEN 16\\Desktop\\django\\wiki\\entries\\{request.POST["tl"]}.md",
+                   f"C:\\Users\\OMEN 16\\Desktop\\django\\wiki\\entries\\{title}.md" )
+            request.session["my_entries"].remove(request.POST["tl"])
+            request.session["my_entries"].append(title)
         request.session.save()
         messages.success(request, f"{title} added successfully.")
         content=request.POST["text"]
@@ -74,6 +81,8 @@ def chose(request):
     })
 
 def edit(request, page):
+    if page not in request.session["my_entries"]:
+        return render(request, "encyclopedia/note-your-page.html")
     file=f"C:\\Users\\OMEN 16\\Desktop\\django\\wiki\\entries\\{page}.md"
     with open(file,"r") as file:
         content=file.read()  

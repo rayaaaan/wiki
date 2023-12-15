@@ -1,0 +1,12 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+
+    <h1 id="hi">Note your page</h1>
+    <a href="{% url 'q:chose' %}"><button id="button">Press here to go back</button></a>
+
+{% endblock %}
