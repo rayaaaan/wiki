@@ -16,7 +16,7 @@ def index(request):
     if request.method=="POST":
         title=request.POST["title_new_page"]
         if request.POST["index"]=="1":
-            if title in util.list_entries():
+            if title.capitalize() in util.list_entries():
                 return render(request, "encyclopedia/go-back.html")
             else:  
                 request.session["my_entries"].append(title)
