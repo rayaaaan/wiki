@@ -1,10 +1,10 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
 from django.contrib import messages
 from markdown import markdown
 
 from random import choice
 from . import util
-from os import remove, rename
+import os
 
 
 
@@ -22,7 +22,7 @@ def index(request):
                 request.session["my_entries"].append(title)
         else:
             print(request.POST["tl"])
-            rename(f"C:\\Users\\OMEN 16\\Desktop\\django\\wiki\\entries\\{request.POST["tl"]}.md",
+            os.rename(f"C:\\Users\\OMEN 16\\Desktop\\django\\wiki\\entries\\{request.POST["tl"]}.md",
                    f"C:\\Users\\OMEN 16\\Desktop\\django\\wiki\\entries\\{title}.md" )
             request.session["my_entries"].remove(request.POST["tl"])
             request.session["my_entries"].append(title)
@@ -90,3 +90,19 @@ def edit(request, page):
         "page":page,
         "content":content,
     })
+    
+
+def chose_rm(request):
+    return render(request, "encyclopedia/chose-rm-page.html",{
+        "my_entries":request.session["my_entries"]
+    })
+    
+def page_remove(request, rm):
+    file=f"C:\\Users\\OMEN 16\\Desktop\\django\\wiki\\entries\\{rm}.md"
+    if rm not in request.session["my_entries"]:
+        return render(request, "encyclopedia/note-your-page.html")
+    request.session["my_entries"].remove(rm)
+    request.session.save()
+    print(request.session["my_entries"])
+    os.remove(file)
+    return render(request,"encyclopedia/remove-page.html")

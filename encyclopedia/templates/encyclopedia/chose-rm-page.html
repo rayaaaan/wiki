@@ -1,0 +1,14 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block body %}
+    <h1>remove Page</h1>
+    <h4>Chouse a page to remove:</h4><br>
+
+    <ul>
+        {% for entry in my_entries %}
+            {% if entry %}
+                <li><a href="{% url 'q:remove' rm=entry %}">{{ entry }}</a></li>
+            {% endif%}
+        {% endfor %}
+    </ul>
+{% endblock %}
