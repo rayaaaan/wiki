@@ -9,12 +9,12 @@ import os
 
 
 def index(request):
+    if "my_entries" not in request.session:
+        request.session["my_entries"]=[]
+    if not request.session["my_entries"]:
+        request.session["my_entries"]=[]
     if request.method=="POST":
         title=request.POST["title_new_page"]
-        if "my_entries" not in request.session:
-            request.session["my_entries"]=[]
-        if not request.session["my_entries"]:
-            request.session["my_entries"]=[]
         if request.POST["index"]=="1":
             if title in util.list_entries():
                 return render(request, "encyclopedia/go-back.html")
